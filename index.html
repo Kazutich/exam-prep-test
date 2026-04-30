@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Экзамен - Подготовка</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+    
+    <div class="app-container">
+        <header>
+            <h1>Подготовка к Экзамену</h1>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text">
+                    <span id="currentQuestionNum">1</span> / <span id="totalQuestionsNum">300</span>
+                </div>
+            </div>
+        </header>
+
+        <main id="quizContainer">
+            <!-- Quiz view -->
+            <div id="questionView">
+                <h2 id="questionText" class="question-text">Загрузка вопроса...</h2>
+                <div id="optionsContainer" class="options-container">
+                    <!-- Options injected here -->
+                </div>
+                <div class="controls">
+                    <button id="nextBtn" class="btn primary-btn" disabled>Следующий вопрос ➔</button>
+                </div>
+            </div>
+
+            <!-- Results view -->
+            <div id="resultsView" class="hidden">
+                <div class="results-card">
+                    <h2>Результаты Теста</h2>
+                    <div class="score-circle">
+                        <svg viewBox="0 0 36 36" class="circular-chart">
+                            <path class="circle-bg"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                            />
+                            <path class="circle" id="scoreCircle"
+                                stroke-dasharray="0, 100"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                            />
+                            <text x="18" y="20.35" class="percentage" id="scorePercentage">0%</text>
+                        </svg>
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item correct">
+                            <span class="label">Правильно:</span>
+                            <span class="value" id="correctCount">0</span>
+                        </div>
+                        <div class="stat-item incorrect">
+                            <span class="label">Неправильно:</span>
+                            <span class="value" id="incorrectCount">0</span>
+                        </div>
+                    </div>
+                    <button id="restartBtn" class="btn primary-btn restart-btn">Начать заново ↺</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
