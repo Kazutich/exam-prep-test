@@ -40,6 +40,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return newArray;
     }
 
+    // Utility: Escape HTML special characters
+    function escapeHTML(str) {
+        return str.replace(/&/g, '&amp;')
+                  .replace(/</g, '&lt;')
+                  .replace(/>/g, '&gt;')
+                  .replace(/"/g, '&quot;')
+                  .replace(/'/g, '&#039;');
+    }
+
     // Initialize Quiz
     function initQuiz() {
         // Shuffle questions
@@ -70,8 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const progressPercent = (currentQuestionIndex / questions.length) * 100;
         progressFillEl.style.width = `${progressPercent}%`;
 
-        // Render question text
-        questionTextEl.innerHTML = q.question.replace(/\n/g, '<br>');
+        // Render question text (escape HTML to prevent <Tag> from being parsed)
+        questionTextEl.innerHTML = escapeHTML(q.question).replace(/\n/g, '<br>');
         
         // Render options
         optionsContainerEl.innerHTML = '';
@@ -98,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             btn.innerHTML = `
                 <span class="option-letter">${letters[idx]})</span>
-                <span class="option-text">${optText}</span>
+                <span class="option-text">${escapeHTML(optText)}</span>
             `;
             
             btn.addEventListener('click', () => handleOptionSelect(btn));

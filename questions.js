@@ -2550,7 +2550,7 @@ const questionsData = [
     "correct_answer": "парсит  JSON"
   },
   {
-    "question": "Проблема",
+    "question": "Код : Row(children: [Text('Очень длинный текст, не помещающийся в экран')]). Проблема",
     "options": [
       "автоматический  scroll",
       "overﬂow  ошибка",
@@ -2620,7 +2620,7 @@ const questionsData = [
     "correct_answer": "Row"
   },
   {
-    "question": "Проблема",
+    "question": "Код : Row(children: [Container(width: 10000)]). Проблема",
     "options": [
       "центрирование",
       "overﬂow  справа",
