@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let correctAnswersCount = 0;
     let incorrectAnswersCount = 0;
     let hasAnsweredCurrent = false;
+    let currentMode = 'all'; // 'all' or 'new'
 
     // DOM Elements
     const questionTextEl = document.getElementById('questionText');
@@ -29,6 +30,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const correctCountEl = document.getElementById('correctCount');
     const incorrectCountEl = document.getElementById('incorrectCount');
     const restartBtnEl = document.getElementById('restartBtn');
+
+    // Tab elements
+    const tabBtns = document.querySelectorAll('.tab-btn');
+
+    // Tab click handling
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const mode = btn.dataset.mode;
+            if (mode === currentMode) return; // Already on this tab
+
+            // Update active tab
+            tabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            currentMode = mode;
+            scoreCircleEl.style.strokeDasharray = '0, 100';
+            initQuiz();
+        });
+    });
 
     // Utility: Shuffle array
     function shuffleArray(array) {
@@ -49,10 +69,20 @@ document.addEventListener('DOMContentLoaded', () => {
                   .replace(/'/g, '&#039;');
     }
 
+    // Get questions based on current mode
+    function getSourceQuestions() {
+        if (currentMode === 'new') {
+            // Questions 231-300 (0-indexed: 230 to 299)
+            return questionsData.slice(230, 300);
+        }
+        return questionsData;
+    }
+
     // Initialize Quiz
     function initQuiz() {
-        // Shuffle questions
-        questions = shuffleArray(questionsData);
+        // Get source and shuffle
+        const source = getSourceQuestions();
+        questions = shuffleArray(source);
         
         // Reset state
         currentQuestionIndex = 0;
